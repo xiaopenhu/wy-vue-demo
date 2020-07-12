@@ -1,35 +1,61 @@
 <template>
   <div id="app">
-    <button v-on:click="increment1">+1</button>
-    <button @click="increment1">简写形式</button>
-    <button @click.stop="increment1">阻止冒泡事件：调用 event.stopPropagation(),</button>
-    <button @click.prevent="increment1">阻止默认事件：调用 event.preventDefault()</button>
-    <button @click.once="increment1">只触发一次</button>
-    <button @click="increment2(2, $event)">携带参数</button>
+    <p>修饰符使用</p>
+    <input type="text" v-model.trim="text"/>
+    <input type="text" v-model.lazy="text"/>
+    <input type="text" v-model.number="num"/>
+
+    <p>多行文本</p>
+    <textarea v-model="text"></textarea>
+    <!-- 注意，<textarea>{{desc}}</textarea> 是不允许的！！！ -->
+
+    <p>复选框 {{checked}}</p>
+    <input type="checkbox" v-model="checked"/>
+
+    <p>多个复选框 {{checkedNames}}</p>
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+
+    <p>单选 {{gender}}</p>
+    <input type="radio" id="male" value="male" v-model="gender"/>
+    <label for="male">男</label>
+    <input type="radio" id="female" value="female" v-model="gender"/>
+    <label for="female">女</label>
+
+    <p>下拉列表选择 {{selected}}</p>
+    <select v-model="selected">
+      <option disabled value="">请选择</option>
+      <option>A</option>
+      <option>B</option>
+    </select>
+
+    <p>下拉列表选择（多选） {{selectedList}}</p>
+    <select v-model="selectedList" multiple>
+      <option disabled value="">请选择</option>
+      <option>A</option>
+      <option>B</option>
+    </select>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
+      text: '前端爆米花',
+      num: 18,
+
+      checked: true,
+      checkedNames: [],
+
+      gender: 'male',
+
+      selected: '',
+      selectedList: []
     }
-  },
-  methods: {
-    increment1 (event) {
-      console.log(event) // 是原生的 event 对象
-    },
-    increment2 (val, event) {
-      console.log(event, val)
-    },
-    loadHandler () {
-      console.log('do some thing')
-    }
-  },
-  mounted () {
-    window.addEventListener('load', this.loadHandler)
-  },
-  beforeDestroy () {
-    window.removeEventListener('load', this.loadHandler)
   }
 }
 </script>
