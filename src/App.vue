@@ -1,33 +1,28 @@
 <template>
   <div id="app">
-    <p>num {{num}}</p>
-    <p>num {{num}}</p>
-    <p>double1 {{double1}}</p>
-    <p>double1 {{double1}}</p>
-    <input v-model="double2"/>
+    <input v-model="name"/>
+    <input v-model="info.city"/>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      num: 20
+      name: '前端爆米花',
+      info: {
+        city: '北京'
+      }
     }
   },
-  computed: {
-    double1 () {
-      console.log('double1')
-      return this.num
+  watch: {
+    name (oldVal, val) {
+      console.log('watch name', oldVal, val) // 值类型，可正常拿到 oldVal 和 val
     },
-    double2: {
-      get () {
-        console.log('double2get')
-        return this.num
+    info: {
+      handler (oldVal, val) {
+        console.log('watch info', oldVal, val) // 引用类型，拿不到 oldVal 。因为指针相同，此时已经指向了新的 val
       },
-      set (val) {
-        console.log('double2set')
-        this.num = val
-      }
+      deep: true // 深度监听
     }
   }
 }
