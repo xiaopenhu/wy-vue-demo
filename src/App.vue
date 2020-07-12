@@ -1,60 +1,33 @@
 <template>
   <div id="app">
-    <p>修饰符使用</p>
-    <input type="text" v-model.trim="text"/>
-    <input type="text" v-model.lazy="text"/>
-    <input type="text" v-model.number="num"/>
-
-    <p>多行文本</p>
-    <textarea v-model="text"></textarea>
-    <!-- 注意，<textarea>{{desc}}</textarea> 是不允许的！！！ -->
-
-    <p>复选框 {{checked}}</p>
-    <input type="checkbox" v-model="checked"/>
-
-    <p>多个复选框 {{checkedNames}}</p>
-    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-    <label for="jack">Jack</label>
-    <input type="checkbox" id="john" value="John" v-model="checkedNames">
-    <label for="john">John</label>
-    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-    <label for="mike">Mike</label>
-
-    <p>单选 {{gender}}</p>
-    <input type="radio" id="male" value="male" v-model="gender"/>
-    <label for="male">男</label>
-    <input type="radio" id="female" value="female" v-model="gender"/>
-    <label for="female">女</label>
-
-    <p>下拉列表选择 {{selected}}</p>
-    <select v-model="selected">
-      <option disabled value="">请选择</option>
-      <option>A</option>
-      <option>B</option>
-    </select>
-
-    <p>下拉列表选择（多选） {{selectedList}}</p>
-    <select v-model="selectedList" multiple>
-      <option disabled value="">请选择</option>
-      <option>A</option>
-      <option>B</option>
-    </select>
+    <ChildOne>
+      <p>{{obj.name}}</p>
+      <p>{{obj.age}}</p>
+    </ChildOne>
+    <ChildTwo>
+      <template v-slot:header>
+        <p>{{obj.name}}</p>
+      </template>
+      <template v-slot:footer>
+        <p>{{obj.age}}</p>
+      </template>
+    </ChildTwo>
   </div>
 </template>
 <script>
+import ChildOne from './components/ChildOne'
+import ChildTwo from './components/ChildTwo'
 export default {
+  components: {
+    ChildOne,
+    ChildTwo
+  },
   data () {
     return {
-      text: '前端爆米花',
-      num: 18,
-
-      checked: true,
-      checkedNames: [],
-
-      gender: 'male',
-
-      selected: '',
-      selectedList: []
+      obj: {
+        name: '前端爆米花',
+        age: 1024
+      }
     }
   }
 }

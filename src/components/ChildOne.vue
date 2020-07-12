@@ -1,15 +1,21 @@
 <template>
-  <div class="hello">
-    我是helloworld
+  <div class="child">
+    <p>普通插槽</p>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld'
+  name: 'ChildOne'
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .child{
+    width: 200px;
+    height: 200px;
+    background: yellow;
+  }
 </style>
