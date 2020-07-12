@@ -1,35 +1,32 @@
 <template>
   <div id="app">
-    <p>遍历数组</p>
-    <ul>
-      <li v-for="(item, index) in listArr" :key="item.id">
-        {{index}} - {{item.id}} - {{item.title}}
-      </li>
-    </ul>
-
-    <p>遍历对象</p>
-    <ul >
-      <li v-for="(val, key) in listObj" :key="key">
-        {{key}} -  {{val.title}}
-      </li>
-    </ul>
+    <button v-on:click="increment1">+1</button>
+    <button @click="increment1">简写形式</button>
+    <button @click="increment2(2, $event)">携带参数</button>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      listArr: [
-        { id: 'a', title: '标题1' }, // 数据结构中，最好有 id ，方便使用 key
-        { id: 'b', title: '标题2' },
-        { id: 'c', title: '标题3' }
-      ],
-      listObj: {
-        a: { title: '标题1' },
-        b: { title: '标题2' },
-        c: { title: '标题3' }
-      }
     }
+  },
+  methods: {
+    increment1 (event) {
+      console.log(event) // 是原生的 event 对象
+    },
+    increment2 (val, event) {
+      console.log(event, val)
+    },
+    loadHandler () {
+      console.log('do some thing')
+    }
+  },
+  mounted () {
+    window.addEventListener('load', this.loadHandler)
+  },
+  beforeDestroy () {
+    window.removeEventListener('load', this.loadHandler)
   }
 }
 </script>
