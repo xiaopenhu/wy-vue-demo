@@ -1,32 +1,32 @@
 <template>
   <div id="app">
-    <ChildOne>
-      <p>{{obj.name}}</p>
-      <p>{{obj.age}}</p>
-    </ChildOne>
-    <ChildTwo>
-      <template v-slot:header>
-        <p>{{obj.name}}</p>
-      </template>
-      <template v-slot:footer>
-        <p>{{obj.age}}</p>
-      </template>
-    </ChildTwo>
+    <p>num {{num}}</p>
+    <p>num {{num}}</p>
+    <p>double1 {{double1}}</p>
+    <p>double1 {{double1}}</p>
+    <input v-model="double2"/>
   </div>
 </template>
 <script>
-import ChildOne from './components/ChildOne'
-import ChildTwo from './components/ChildTwo'
 export default {
-  components: {
-    ChildOne,
-    ChildTwo
-  },
   data () {
     return {
-      obj: {
-        name: '前端爆米花',
-        age: 1024
+      num: 20
+    }
+  },
+  computed: {
+    double1 () {
+      console.log('double1')
+      return this.num
+    },
+    double2: {
+      get () {
+        console.log('double2get')
+        return this.num
+      },
+      set (val) {
+        console.log('double2set')
+        this.num = val
       }
     }
   }
