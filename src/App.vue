@@ -1,29 +1,71 @@
 <template>
   <div id="app">
-    <input v-model="name"/>
-    <input v-model="info.city"/>
+    <p>修改触发更新过程：<input type="text" v-model="name"></p>
+    <LifeChild :name="name"></LifeChild>
+    <div>
+      <button @click="changeState('A')">A</button>
+      <button @click="changeState('B')">B</button>
+      <button @click="changeState('C')">C</button>
+      <keep-alive> <!-- tab 切换 -->
+        <KeepAliveStateA v-if="state === 'A'"/> <!-- v-show -->
+        <KeepAliveStateB v-if="state === 'B'"/>
+        <KeepAliveStateC v-if="state === 'C'"/>
+      </keep-alive>
+    </div>
   </div>
 </template>
 <script>
+import LifeChild from './components/LifeChild'
+import KeepAliveStateA from './components/KeepAliveStateA'
+import KeepAliveStateB from './components/KeepAliveStateB'
+import KeepAliveStateC from './components/KeepAliveStateC'
 export default {
+  components: {
+    LifeChild,
+    KeepAliveStateA,
+    KeepAliveStateB,
+    KeepAliveStateC
+  },
   data () {
     return {
       name: '前端爆米花',
-      info: {
-        city: '北京'
-      }
+      state: 'A'
     }
   },
-  watch: {
-    name (oldVal, val) {
-      console.log('watch name', oldVal, val) // 值类型，可正常拿到 oldVal 和 val
-    },
-    info: {
-      handler (oldVal, val) {
-        console.log('watch info', oldVal, val) // 引用类型，拿不到 oldVal 。因为指针相同，此时已经指向了新的 val
-      },
-      deep: true // 深度监听
+  methods: {
+    changeState (state) {
+      this.state = state
     }
+  },
+  beforeCreate () {
+    console.log('父组件-beforeCreate')
+  },
+  created () {
+    console.log('父组件-created')
+  },
+  beforeMount () {
+    console.log('父组件-beforeMount')
+  },
+  mounted () {
+    console.log('父组件-mounted')
+  },
+  beforeUpdate () {
+    console.log('父组件-beforeUpdate')
+  },
+  updated () {
+    console.log('父组件-updated')
+  },
+  beforeDestroy () {
+    console.log('父组件-beforeDestroy')
+  },
+  destroyed () {
+    console.log('父组件-destroyed')
+  },
+  activated () {
+    console.log('父组件-activated')
+  },
+  deactivated () {
+    console.log('父组件-deactivated')
   }
 }
 </script>
