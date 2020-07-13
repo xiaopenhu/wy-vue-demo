@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <LifeChild :name="msg"></LifeChild>
+    <p v-text="msg"></p>
+    <LifeChild @fa="getMsg"></LifeChild>
   </div>
 </template>
 <script>
@@ -11,7 +12,12 @@ export default {
   },
   data () {
     return {
-      msg: '我是父组件的值，现在传递给了子组件'
+      msg: '我是父组件的msg，请点击按钮'
+    }
+  },
+  methods: {
+    getMsg: function (val) {
+      this.msg = val
     }
   }
 }

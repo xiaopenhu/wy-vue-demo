@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>{{name}}</p>
+      <button @click="pushMsg">{{value}}</button>
     </div>
 </template>
 
@@ -8,6 +8,15 @@
 
 export default {
   name: 'LifeChild',
-  props: ['name']
+  data () {
+    return {
+      value: '我是子组件的value'
+    }
+  },
+  methods: {
+    pushMsg: function () {
+      this.$emit('fa', this.value)
+    }
+  }
 }
 </script>
