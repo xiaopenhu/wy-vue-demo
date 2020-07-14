@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import User from '../views/User'
 
 Vue.use(VueRouter)
 
@@ -13,10 +14,29 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    // 路由懒加载
+    // /* webpackChunkName: "about" */ 将懒加载的组件按组，打包在异步块中
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/about1',
+    name: 'About1',
+    // 路由懒加载
+    // /* webpackChunkName: "about" */ 将懒加载的组件按组，打包在异步块中
+    component: () => import(/* webpackChunkName: "about" */ '../views/About1.vue')
+  },
+  {
+    path: '/pay',
+    name: 'Pay',
+    // 路由懒加载
+    // /* webpackChunkName: "pay" */ 将懒加载的组件按组，打包在异步块中
+    component: () => import(/* webpackChunkName: "pay" */ '../views/Pay.vue')
+  },
+  // 携带参数的路由
+  {
+    path: '/user/:id',
+    // 加载页面时，会一同加载
+    component: User
   }
 ]
 
