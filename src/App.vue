@@ -1,33 +1,32 @@
 <template>
   <div id="app">
-    <p>
-      <button @click="changeVal">通过ref操作dom</button>
-      <input ref="inText" type="text" value="">
-    </p>
-    <p>
-      <button @click="changeChild">通过ref操作子组件</button>
-      <LifeChild ref="lifeChild"></LifeChild>
-    </p>
+    <p ref="msgDiv">{{msg}}</p>
+    <p>msg1: {{msg1}}</p>
+    <p>msg2: {{msg2}}</p>
+    <p>msg3: {{msg3}}</p>
+    <button @click="changeMsg">
+      使用nextTick可获取渲染完成之后的dom
+    </button>
   </div>
 </template>
 <script>
-import LifeChild from './components/LifeChild'
 export default {
-  components: {
-    LifeChild
-  },
   data () {
     return {
+      msg: '我是初始字符串',
+      msg1: '',
+      msg2: '',
+      msg3: ''
     }
   },
   methods: {
-    changeVal: function () {
-      this.$refs.inText.value = '通过ref操作dom成功'
-      console.log(this.$refs.inText)
-    },
-    changeChild: function () {
-      console.log(this.$refs.lifeChild)
-      this.$refs.lifeChild.$el.value = '通过ref操作子组件成功'
+    changeMsg () {
+      this.msg = '改变后的字符串'
+      this.msg1 = this.$refs.msgDiv.innerHTML
+      this.$nextTick(() => {
+        this.msg2 = this.$refs.msgDiv.innerHTML
+      })
+      this.msg3 = this.$refs.msgDiv.innerHTML
     }
   }
 }
