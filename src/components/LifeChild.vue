@@ -1,22 +1,10 @@
 <template>
-    <div>
-      <button @click="pushMsg">{{value}}</button>
-    </div>
+  <input ref="inText" type="text" >
 </template>
 
 <script>
 
 export default {
-  name: 'LifeChild',
-  data () {
-    return {
-      value: '我是子组件的value'
-    }
-  },
-  methods: {
-    pushMsg: function () {
-      this.$emit('fa', this.value)
-    }
-  }
+  name: 'LifeChild'
 }
 </script>

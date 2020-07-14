@@ -1,7 +1,13 @@
 <template>
   <div id="app">
-    <p v-text="msg"></p>
-    <LifeChild @fa="getMsg"></LifeChild>
+    <p>
+      <button @click="changeVal">通过ref操作dom</button>
+      <input ref="inText" type="text" value="">
+    </p>
+    <p>
+      <button @click="changeChild">通过ref操作子组件</button>
+      <LifeChild ref="lifeChild"></LifeChild>
+    </p>
   </div>
 </template>
 <script>
@@ -12,12 +18,16 @@ export default {
   },
   data () {
     return {
-      msg: '我是父组件的msg，请点击按钮'
     }
   },
   methods: {
-    getMsg: function (val) {
-      this.msg = val
+    changeVal: function () {
+      this.$refs.inText.value = '通过ref操作dom成功'
+      console.log(this.$refs.inText)
+    },
+    changeChild: function () {
+      console.log(this.$refs.lifeChild)
+      this.$refs.lifeChild.$el.value = '通过ref操作子组件成功'
     }
   }
 }
