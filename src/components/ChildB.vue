@@ -1,10 +1,10 @@
 <template>
-  <input ref="inText" type="text" >
+  <p>我是ChildB组件</p>
 </template>
 
 <script>
 
 export default {
-  name: 'LifeChild'
+  name: 'ChildB'
 }
 </script>

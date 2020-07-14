@@ -1,32 +1,31 @@
 <template>
   <div id="app">
-    <p ref="msgDiv">{{msg}}</p>
-    <p>msg1: {{msg1}}</p>
-    <p>msg2: {{msg2}}</p>
-    <p>msg3: {{msg3}}</p>
-    <button @click="changeMsg">
-      使用nextTick可获取渲染完成之后的dom
+    <button @click="currentIndex = 0">
+      加载A组件
     </button>
+    <button @click="currentIndex = 1">
+      加载B组件
+    </button>
+    <component :is="currentTabComponent"></component>
   </div>
 </template>
 <script>
+import ChildA from './components/ChildA'
+import ChildB from './components/ChildB'
 export default {
+  components: {
+    ChildA,
+    ChildB
+  },
   data () {
     return {
-      msg: '我是初始字符串',
-      msg1: '',
-      msg2: '',
-      msg3: ''
+      currentIndex: 0,
+      status: ['ChildA', 'ChildB']
     }
   },
-  methods: {
-    changeMsg () {
-      this.msg = '改变后的字符串'
-      this.msg1 = this.$refs.msgDiv.innerHTML
-      this.$nextTick(() => {
-        this.msg2 = this.$refs.msgDiv.innerHTML
-      })
-      this.msg3 = this.$refs.msgDiv.innerHTML
+  computed: {
+    currentTabComponent () {
+      return this.status[this.currentIndex]
     }
   }
 }
