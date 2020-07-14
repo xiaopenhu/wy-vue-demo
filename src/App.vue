@@ -1,22 +1,19 @@
 <template>
   <div id="app">
-    <button @click="ifVal = false">
-      点击按钮，懒加载（异步加载）B组件
-    </button>
-    <ChildA v-if="ifVal"></ChildA>
-    <ChildB v-if="!ifVal"></ChildB>
+    <p>mixin-city：{{city}}</p>
+    <p>app-name：{{name}}</p>
+    <p>
+      <button @click="showCity">console.log(mixin-city)</button>
+    </p>
   </div>
 </template>
 <script>
-import ChildA from './components/ChildA'
+import Base from './components/mixin/base'
 export default {
-  components: {
-    ChildA,
-    ChildB: () => import('./components/ChildB')
-  },
+  mixins: [Base],
   data () {
     return {
-      ifVal: true
+      name: '前端爆米花'
     }
   }
 }
