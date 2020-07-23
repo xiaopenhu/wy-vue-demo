@@ -19,17 +19,20 @@ const routes = [
     // 路由懒加载
     // /* webpackChunkName: "about" */ 将懒加载的组件按组，打包在异步块中
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    meta: { btnPermissions: ['admin', 'supper', 'normal'] }, // 页面需要的权限
     // 使用子路由，需要在父路由填写<router-view/>路由占位符
     children: [
       {
-        path: 'user',
+        path: 'usera',
         name: 'userA',
-        component: UserA
+        component: UserA,
+        meta: { btnPermissions: ['admin', 'supper'] } // 页面需要的权限
       },
       {
         path: 'userb',
         name: 'UserB',
-        component: UserB
+        component: UserB,
+        meta: { btnPermissions: ['admin', 'normal'] } // 页面需要的权限
       }
     ]
   },
